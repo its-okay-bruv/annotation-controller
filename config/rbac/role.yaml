@@ -1,0 +1,32 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: manager-role
+rules:
+- apiGroups:
+  - annotate.example.com
+  resources:
+  - podannotators
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - annotate.example.com
+  resources:
+  - podannotators/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - annotate.example.com
+  resources:
+  - podannotators/status
+  verbs:
+  - get
+  - patch
+  - update
