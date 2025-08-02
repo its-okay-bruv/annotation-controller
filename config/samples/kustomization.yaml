@@ -1,4 +1,0 @@
-## Append samples of your project ##
-resources:
-- annotate_v1_podannotator.yaml
-#+kubebuilder:scaffold:manifestskustomizesamples
