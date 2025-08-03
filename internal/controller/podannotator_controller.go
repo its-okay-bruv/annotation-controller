@@ -123,10 +123,12 @@ func (r *PodAnnotatorReconciler) Reconcile(ctx context.Context, req ctrl.Request
 	annotator.Status.AnnotatedCount = int32(updated)
 	annotator.Status.Conditions = []metav1.Condition{
 		{
-			Type:    "Ready",
-			Status:  metav1.ConditionTrue,
-			Reason:  "AllPodsAnnotated",
-			Message: fmt.Sprintf("Annotated %d/%d pods", updated, total),
+			Type:               "Ready",
+			Status:             metav1.ConditionTrue,
+			Reason:             "AllPodsAnnotated",
+			Message:            fmt.Sprintf("Annotated %d/%d pods", updated, total),
+			LastTransitionTime: metav1.Now(),
+			ObservedGeneration: annotator.Generation,
 		},
 	}
 	if err := r.Status().Update(ctx, &annotator); err != nil {
