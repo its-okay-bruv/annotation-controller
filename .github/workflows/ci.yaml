@@ -37,14 +37,21 @@ jobs:
           registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Read version
+        id: version
+        run: |
+          raw=$(<VERSION)
+          version=$(echo "$raw" | grep -Eo '^v[0-9]+\.[0-9]+\.[0-9]+')
+          if [[ -z "$version" ]]; then exit 1; fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
       - name: Build & push image
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/controller:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/controller:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/annotation-controller-test:${{ steps.version.outputs.version }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/annotation-controller-test:${{ github.sha }}
 
       - name: Logout
         run: docker logout
