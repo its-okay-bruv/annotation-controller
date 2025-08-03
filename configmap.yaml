@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+  namespace: controller
+data:
+  # Example configuration key/value(s)
+  settings.yaml: |
+    # Your app can read this from /etc/demo-config/settings.yaml
+    logLevel: info
+    featureXEnabled: "true"

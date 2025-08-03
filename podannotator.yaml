@@ -1,0 +1,12 @@
+apiVersion: annotate.example.com/v1
+kind: PodAnnotator
+metadata:
+  name: demo-annotator
+  namespace: controller
+spec:
+  selector:
+    matchLabels:
+      app: demo              # matches demo-app Pod
+  annotation:
+    key: example.com/last-seen
+    value: ""                # empty → controller will stamp a timestamp
