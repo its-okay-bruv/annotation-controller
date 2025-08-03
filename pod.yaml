@@ -36,7 +36,7 @@ spec:
         port: 80
       initialDelaySeconds: 5
       periodSeconds: 10
-    # mount a simple ConfigMap (assumes you’ve created one named demo-config)
+    # mount a simple ConfigMap
     volumeMounts:
       - name: config
         mountPath: /etc/demo-config
