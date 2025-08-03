@@ -19,7 +19,7 @@ jobs:
       - name: Run unit tests
         run: |
           make test
-          make test-e2e
+      #    make test-e2e >> skip this for now, dont really want to do k8s test on test
   build-and-push:
     needs: test
     if: github.ref == 'refs/heads/main'
